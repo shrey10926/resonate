@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  {% if t=='s' %}
+  <div class="shadow p-3 mb-5 bg-white rounded">
+    <h3 style="color:rgb(0, 102, 255)">Sorry! This movie is not in our database.</h3>
+    <h3 style="color:rgb(0, 102, 255)">Please check if you spelled it correct.</h3>
+    <h3 style="color:rgb(0, 102, 255)">Or try with another movie.</h3>
+  </div>
+
+  {% else %}
+  <div class="shadow p-3 mb-5 bg-white rounded">
+    <h1 style="color:DarkCyan">"{{movie}}" is a great choice.</h1>
+    <h3 style="color:DarkCyan">Here are some more like this</h3>
+  </div>
+
+    <ul class="list-group list-group-flush">
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>Vote</th>
+				<th>Vote_count</th>
+				<th>Year</th>
+			</tr>
+			{% for key,value in r.iterrows() %}
+			<tr style="color:DarkCyan">
+				<td>{{ value['title'].upper() }}</td>
+				<td>{{ value['vote_average'] }}</td>
+                <td>{{ value['vote_count'] }}</td>
+				<td>{{ value['year'] }}</td>
+
+            </tr>
+			{% endfor %}
+        </table>
+
+    </ul>
+  {% endif %}
+
+{% endblock %}
